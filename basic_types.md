@@ -201,3 +201,10 @@ put_elem/3 returned a new tuple. The original tuple stored in the tuple variable
     {:ok, "world"}
     iex> tuple
     {:ok, "hello"}
+
+# Lists or tuples?
+
+ * Lists are stored in memory as linked lists, meaning that each element in a list holds its value and points to the following element until the end of the list is reached. 
+This means accessing the length of a list is a linear operation: we need to traverse the whole list in order to figure out its size.
+
+ * Tuples, on the other hand, are stored contiguously in memory. This means getting the tuple size or accessing an element by index is fast. However, updating or adding elements to tuples is expensive because it requires creating a new tuple in memory
