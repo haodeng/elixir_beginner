@@ -45,3 +45,31 @@ whereas trunc/2 identifies a different (nonexistent) function with the same name
                              def trunc()
 
     Returns the integer part of number.
+
+# Atoms
+An atom is a constant whose value is its own name. Some other languages call these symbols. They are often useful to enumerate over distinct values
+
+    iex> :apple
+    :apple
+    iex> :orange
+    :orange
+    iex> :watermelon
+    :watermelon
+    
+    iex> :apple == :apple
+    true
+    iex> :apple == :orange
+    false
+    
+    # Elixir allows you to skip the leading : for the atoms false, true and nil.
+    iex> true == :true
+    true
+    iex> is_atom(false)
+    true
+    iex> is_boolean(:false)
+    true
+    
+    # Aliases start in upper case and are also atoms
+    iex> is_atom(Hello)
+    true
+    
