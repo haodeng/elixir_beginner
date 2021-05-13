@@ -208,3 +208,6 @@ put_elem/3 returned a new tuple. The original tuple stored in the tuple variable
 This means accessing the length of a list is a linear operation: we need to traverse the whole list in order to figure out its size.
 
  * Tuples, on the other hand, are stored contiguously in memory. This means getting the tuple size or accessing an element by index is fast. However, updating or adding elements to tuples is expensive because it requires creating a new tuple in memory
+
+
+When counting the elements in a data structure, Elixir also abides by a simple rule: the function is named size if the operation is in constant time (i.e. the value is pre-calculated) or length if the operation is linear (i.e. calculating the length gets slower as the input grows).
