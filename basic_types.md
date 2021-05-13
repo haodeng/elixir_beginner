@@ -73,3 +73,68 @@ An atom is a constant whose value is its own name. Some other languages call the
     iex> is_atom(Hello)
     true
     
+# String
+
+    # Encoded in UTF-8
+    iex> "hellö"
+    "hellö"
+    
+    # string interpolation
+    iex> string = :world
+    iex> "hellö #{string}"
+    "hellö world"
+    
+    # Line break
+    iex> "hello
+    ...> world"
+    "hello\nworld"
+    iex> "hello\nworld"
+    "hello\nworld"
+    
+    # Print a string
+    iex> IO.puts("hello\nworld")
+    hello
+    world
+    :ok # IO.puts/1 function returns the atom :ok after printing.
+    
+    # Strings in Elixir are represented internally by contiguous sequences of bytes known as binaries
+    iex> is_binary("hellö")
+    true
+    
+    # the number of bytes in that string is 6, even though it has 5 graphemes. 
+    # That’s because the grapheme “ö” takes 2 bytes to be represented in UTF-8. 
+    iex> byte_size("hellö")
+    6
+    iex> String.length("hellö")
+    5
+    
+    iex> String.upcase("hellö")
+    "HELLÖ"
+    
+# Anonymous functions
+a dot (.) between the variable and parentheses is required to invoke an anonymous function. 
+The dot ensures there is no ambiguity between calling the anonymous function matched to a variable add and a named function add/2
+
+    // The anonymous function is stored in the variable add
+    iex> add = fn a, b -> a + b end
+    #Function<12.71889879/2 in :erl_eval.expr/5>
+    iex> add.(1, 2)
+    3
+    iex> is_function(add)
+    true
+    
+Anonymous functions in Elixir are also identified by the number of arguments they receive. We can check if a function is of any given arity by using is_function/2:
+
+    # check if add is a function that expects exactly 2 arguments
+    iex> is_function(add, 2)
+    true
+    # check if add is a function that expects exactly 1 argument
+    iex> is_function(add, 1)
+    false
+    
+Let’s define a new anonymous function that uses the add anonymous function we have previously defined
+    
+    iex> double = fn a -> add.(a, a) end
+    #Function<6.71889879/1 in :erl_eval.expr/5>
+    iex> double.(2)
+    4
