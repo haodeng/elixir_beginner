@@ -138,3 +138,66 @@ Let’s define a new anonymous function that uses the add anonymous function we 
     #Function<6.71889879/1 in :erl_eval.expr/5>
     iex> double.(2)
     4
+    
+ # (Linked) Lists
+ 
+    # Values can be of any type
+    iex> [1, 2, true, 3]
+    [1, 2, true, 3]
+    iex> length [1, 2, 3]
+    3
+
+Two lists can be concatenated or subtracted using the ++/2 and --/2 operators
+
+    iex> [1, 2, 3] ++ [4, 5, 6]
+    [1, 2, 3, 4, 5, 6]
+    iex> [1, true, 2, false, 3, true] -- [true, false]
+    [1, 2, 3, true]
+    
+    iex> list = [1, 2, 3]
+    # The head is the first element of a list
+    iex> hd(list)
+    1
+    # the tail is the remainder of the list
+    iex> tl(list)
+    [2, 3]
+    # Getting the head or the tail of an empty list throws an error
+    iex> hd([])
+    ** (ArgumentError) argument error
+    
+When Elixir sees a list of printable ASCII numbers, Elixir will print that as a charlist (literally a list of characters). 
+
+    iex> [11, 12, 13]
+    '\v\f\r'
+    iex> [104, 101, 108, 108, 111]
+    'hello'
+    
+single-quoted and double-quoted representations are not equivalent in Elixir as they are represented by different types:
+Single quotes are charlists, double quotes are strings. 
+
+    iex> 'hello' == "hello"
+    
+# Tuples
+ Like lists, tuples can hold any value
+ 
+     iex> {:ok, "hello"}
+    {:ok, "hello"}
+    iex> tuple_size {:ok, "hello"}
+    2
+    false
+    
+Tuples store elements contiguously in memory. This means accessing a tuple element by index or getting the tuple size is a fast operation. 
+Indexes start from zero
+
+    iex> tuple = {:ok, "hello"}
+    iex> elem(tuple, 1)
+    "hello"
+    iex> tuple_size(tuple)
+    2
+
+put_elem/3 returned a new tuple. The original tuple stored in the tuple variable was not modified. Like lists, tuples are also immutable. Every operation on a tuple returns a new tuple, it never changes the given one.
+
+    iex> put_elem(tuple, 1, "world")
+    {:ok, "world"}
+    iex> tuple
+    {:ok, "hello"}
