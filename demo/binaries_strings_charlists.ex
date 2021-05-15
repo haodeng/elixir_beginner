@@ -111,4 +111,19 @@ IO.inspect(to_string('hełło')) # "hełło"
 IO.inspect(to_string(:hello)) # "hello"
 IO.inspect(to_string(1)) # "1"
 
+# String (binary) concatenation uses the <> operator but charlists, being lists, use the list concatenation operator ++
+
+#'this ' <> 'fails'
+#** (ArgumentError) expected binary argument in <> operator but got: 'this '
+#(elixir) lib/kernel.ex:1821: Kernel.wrap_concatenation/3
+#(elixir) lib/kernel.ex:1808: Kernel.extract_concatenations/2
+#(elixir) expanding macro: Kernel.<>/2
+#iex:1: (file)
+
+IO.inspect('this ' ++ 'works') # 'this works'
+
+#"he" ++ "llo"
+#** (ArgumentError) argument error
+#:erlang.++("he", "llo")
+IO.inspect("he" <> "llo") # "hello"
 
